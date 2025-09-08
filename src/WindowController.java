@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.MouseInfo;
@@ -11,7 +13,7 @@ import javax.swing.Timer;
  * Handles user input for the game window
  */
 
-public class WindowController implements MouseListener, ActionListener
+public class WindowController implements MouseListener, ActionListener, KeyListener
 {
     //Tells the program whether the mouse is within the frame
     private boolean inFrame;
@@ -27,11 +29,6 @@ public class WindowController implements MouseListener, ActionListener
         this.model = model;
         inFrame = false;
         update = new Timer(1, this);
-    }
-
-    private void changeWindowPosition()
-    {
-
     }
 
     @Override
@@ -55,7 +52,6 @@ public class WindowController implements MouseListener, ActionListener
     public void mouseReleased(MouseEvent e) {
         //Stops the timer that calls actionPerformed repeatedly
         update.stop();
-        
     }
 
     @Override
@@ -79,5 +75,25 @@ public class WindowController implements MouseListener, ActionListener
             //Update the mouse's starting point
             mouseStartingPoint = MouseInfo.getPointerInfo().getLocation();
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        //When escape key is pressed, tell model to terminate the program
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
+        {
+            System.out.println("Escape");
+            model.terminate();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        
     }
 }

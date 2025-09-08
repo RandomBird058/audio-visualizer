@@ -35,8 +35,9 @@ public class WindowModel
         windowSize = determineWindowSize(screenSize);
         window = new WindowView(windowSize, windowPosition);
 
-        //Add action listeners to the window
+        //Add listeners to the window
         window.addMouseListener(controller);
+        window.addKeyListener(controller);
     }
 
     /**
@@ -68,6 +69,12 @@ public class WindowModel
 
         //Changes the visible location of the window to the new point
         window.setLocation(windowPosition);
+    }
+
+    //Terminates the program
+    public void terminate()
+    {
+        System.exit(0);
     }
 
 }
