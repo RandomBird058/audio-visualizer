@@ -5,7 +5,10 @@ import java.util.Random;
 /**
  * 
  * Handles backend for windows.
- * Knows the size of the screen and feeds it to the window
+ * Knows the size of the screen and feeds it to the window view
+ * Knows the controller and gets input from it
+ * Knows the position of the window
+ * Has a random number generator
  */
 
 public class WindowModel
@@ -22,9 +25,6 @@ public class WindowModel
      */
     public WindowModel(Dimension screenSize)
     {
-        //TODO: Start the window at a random point on the screen
-        windowPosition = new Point(0, 0);
-
         //Instantiate random number generator
         rand = new Random();
 
@@ -33,6 +33,11 @@ public class WindowModel
 
         //Create the dimension of the window and initialize the window to those dimensions
         windowSize = determineWindowSize(screenSize);
+
+        //Start the window at a random point on the screen without going off the screen
+        windowPosition = windowStartPosition(screenSize);
+
+        //Instantiate the window
         window = new WindowView(windowSize, windowPosition);
 
         //Add listeners to the window
@@ -47,10 +52,23 @@ public class WindowModel
      */
     private Dimension determineWindowSize(Dimension screenSize)
     {
-        int windowWidth = screenSize.width / rand.nextInt(2, 5);
-        int windowHeight = screenSize.height / rand.nextInt(2, 5);
+        int windowWidth = screenSize.width / rand.nextInt(2, 4);
+        int windowHeight = screenSize.height / rand.nextInt(2, 4);
         System.out.println("Width: " + windowWidth + " Height: " + windowHeight);
         return new Dimension(windowWidth, windowHeight);
+    }
+
+    /**
+     * Calculates the starting point of the window by generating random values between 0 and the screen size - the window width
+     * @param screenSize The size of the screen
+     * @return The point that the screen will start at
+     */
+    private Point windowStartPosition(Dimension screenSize)
+    {
+        int x = rand.nextInt((int)(screenSize.getWidth() - windowSize.getWidth()));
+        int y = rand.nextInt((int)(screenSize.getHeight() - windowSize.getHeight()));
+        System.out.println("Window position: " + x + ", " + y);
+        return new Point(x, y);
     }
 
     /**
