@@ -27,7 +27,6 @@ public class WindowController implements MouseListener, ActionListener, KeyListe
     public WindowController(WindowModel model)
     {
         this.model = model;
-        inFrame = false;
         update = new Timer(1, this);
     }
 

@@ -21,7 +21,7 @@ public class WindowModel
 
     /**
      * Declares the controller and the window
-     * @param screenSize
+     * @param screenSize The size of the screen the game is displayed on
      */
     public WindowModel(Dimension screenSize)
     {
@@ -53,7 +53,11 @@ public class WindowModel
     private Dimension determineWindowSize(Dimension screenSize)
     {
         int windowWidth = screenSize.width / rand.nextInt(2, 4);
+        //Make divisible by 10 for ease of use
+        windowWidth -= windowWidth % 10;
         int windowHeight = screenSize.height / rand.nextInt(2, 4);
+        //Make divisible by 10 for ease of use
+         windowHeight -= windowHeight % 10;
         System.out.println("Width: " + windowWidth + " Height: " + windowHeight);
         return new Dimension(windowWidth, windowHeight);
     }
