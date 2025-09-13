@@ -1,2 +1,2 @@
 # java-snake-two
-A take two on my Snake game made in Java for my Java programming final project in 2024.
+A first attempt on an audio visualizer and music player
